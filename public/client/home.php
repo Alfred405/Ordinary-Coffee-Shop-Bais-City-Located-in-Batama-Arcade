@@ -93,7 +93,7 @@
 <script>
     $(document).ready(function () {
 
-        // =========== ADD ORDER ===========
+        
         $('.btn-add').click(function () {
             const add = $('#address').val();
             const contact = $('#contact').val();
@@ -116,7 +116,6 @@
             }, 'json');
         });
 
-        // =========== SHOW EDIT MODAL ===========
         $('.edit-btn').click(function () {
             $('#edit-id').val($(this).data('id'));
             $('#edit-address').val($(this).data('address'));
@@ -125,7 +124,6 @@
             $('#edit-modal').show();
         });
 
-        // =========== UPDATE ORDER ===========
         $('#update-btn').click(function () {
 
             $.post('../../handlers/updateOrder.php', {
@@ -146,7 +144,6 @@
 
         });
 
-        // =========== DELETE ORDER ===========
         $('.delete-btn').click(function () {
 
             if (!confirm("Are you sure you want to delete this order?")) return;
