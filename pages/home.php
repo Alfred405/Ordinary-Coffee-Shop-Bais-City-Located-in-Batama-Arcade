@@ -68,12 +68,12 @@
 
 <div class="carousel w-full">
     <div id="item1" class="carousel-item w-full">
-        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"
+        <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0"
              class="w-full object-cover" />
     </div>
 
     <div id="item2" class="carousel-item w-full">
-        <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd"
+        <img src="https://images.unsplash.com/photo-1512568400610-62da28bc8a13"
              class="w-full object-cover" />
     </div>
 
@@ -82,11 +82,13 @@
              class="w-full object-cover" />
     </div>
 
+ 
     <div id="item4" class="carousel-item w-full">
-        <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0"
+        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"
              class="w-full object-cover" />
     </div>
 </div>
+
 
 <div class="flex w-full justify-center gap-2 py-3">
     <a href="#item1" class="btn btn-xs">1</a>
@@ -110,8 +112,8 @@
         <div class="card-body">
             <h2 class="card-title">Cappuccino</h2>
             <p>Rich espresso with steamed milk and foam.</p>
-            <div class="card-actions justify-end">
-                <button class="btn bg-[#6b4f3a] text-white border-none">Order</button>
+            <div class="card-actions justify-between items-center">
+                <span class="text-lg font-bold text-[#6b4f3a]">₱80</span>
             </div>
         </div>
     </div>
@@ -124,8 +126,8 @@
         <div class="card-body">
             <h2 class="card-title">Iced Latte</h2>
             <p>Cold milk, ice, and smooth espresso.</p>
-            <div class="card-actions justify-end">
-                <button class="btn bg-[#6b4f3a] text-white border-none">Order</button>
+            <div class="card-actions justify-between items-center">
+                <span class="text-lg font-bold text-[#6b4f3a]">₱85</span>
             </div>
         </div>
     </div>
@@ -138,8 +140,8 @@
         <div class="card-body">
             <h2 class="card-title">Caramel Macchiato</h2>
             <p>Layered espresso with vanilla and caramel.</p>
-            <div class="card-actions justify-end">
-                <button class="btn bg-[#6b4f3a] text-white border-none">Order</button>
+            <div class="card-actions justify-between items-center">
+                <span class="text-lg font-bold text-[#6b4f3a]">₱95</span>
             </div>
         </div>
     </div>
@@ -152,8 +154,8 @@
         <div class="card-body">
             <h2 class="card-title">Mocha</h2>
             <p>A delicious mix of chocolate and espresso.</p>
-            <div class="card-actions justify-end">
-                <button class="btn bg-[#6b4f3a] text-white border-none">Order</button>
+            <div class="card-actions justify-between items-center">
+                <span class="text-lg font-bold text-[#6b4f3a]">₱90</span>
             </div>
         </div>
     </div>

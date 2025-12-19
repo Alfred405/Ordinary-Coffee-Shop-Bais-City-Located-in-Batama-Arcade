@@ -49,7 +49,7 @@ class Users extends Dbh
                     $_SESSION['id'] = $row['id'];
                     $_SESSION['email'] = $row['email'];
 
-                    $redirect = ($_SESSION['id'] === 4) ? '../public/admin/home.php' : '../public/client/home.php';
+                    $redirect = ($_SESSION['id'] === 20) ? '../public/admin/home.php' : '../public/client/home.php';
 
                     return $redirect;
                 } else {

@@ -1,0 +1,16 @@
+{
+  "name": "coffee-shop",
+  "version": "1.0.0",
+  "description": "Coffee Shop Management System",
+  "main": "index.php",
+  "scripts": {
+    "build-css": "tailwindcss -i ./src/input.css -o ./public/assets/css/output.css --watch",
+    "build-css-prod": "tailwindcss -i ./src/input.css -o ./public/assets/css/output.css --minify"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "daisyui": "^4.12.10",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0"
+  }
+}
