@@ -231,31 +231,111 @@
 <script>
     $(document).ready(function () {
 
-        // =========== ADD ORDER ===========
-        $('.btn-add').click(function () {
-            const add = $('#address').val();
-            const contact = $('#contact').val();
-            const amount = $('#amount').val();
-            const userId = $(this).data('user-id');
-            const roomId = $(this).data('room-id');
 
-            console.log(roomId, userId, contact, amount, add)
+        function calculateAmount() {
+            const price = parseFloat($('#product').val()) || 0;
+            const quantity = parseInt($('#quantity').val()) || 1;
+            const total = price * quantity;
+            $('#amount').val(total);
+        }
 
-            $.post('../../handlers/book.php', {
-                book_now: true,
-                add, contact, amount, userId, roomId
-            }, function (res) {
-                if (res.success) {
-                    alert("Order Added!");
-                    location.reload();
-                } else {
-                    alert(res.error);
-                }
+        $('#product, #quantity').on('change input', calculateAmount);
+
+        calculateAmount();
+
+
+        function loadOrders() {
+            $.get('../../handlers/getOrders.php', function(data) {
+                const tbody = $('#orders-table');
+                tbody.empty();
+                data.forEach(function(item) {
+                    const statusClass = item.status === 'approved' ? 'badge-success' : 'badge-warning';
+                    const row = `
+                        <tr id="row-${item.item_id}" class="hover transition-all duration-200">
+                            <td class="font-semibold">#${item.item_id}</td>
+                            <td>${item.email}</td>
+                            <td>${item.contact}</td>
+                            <td>${item.address}</td>
+                            <td class="font-bold text-success">₱${item.total_amount}</td>
+                            <td>
+                                <span class="badge ${statusClass} badge-lg">
+                                    ${item.status.charAt(0).toUpperCase() + item.status.slice(1)}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-info edit-btn"
+                                            data-id="${item.item_id}"
+                                            data-address="${item.address}"
+                                            data-contact="${item.contact}"
+                                            data-amount="${item.total_amount}">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                    <button class="btn btn-sm btn-error delete-btn"
+                                            data-id="${item.item_id}">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                    tbody.append(row);
+                });
             }, 'json');
-        });
+        }
 
-        // =========== SHOW EDIT MODAL ===========
-        $('.edit-btn').click(function () {
+
+        loadOrders();
+
+       $('#addOrderBtn').click(function () {
+
+    const product = $('#product').val();
+    const add = $('#address').val();
+    const contact = $('#contact').val();
+    const amount = $('#amount').val();
+    const userId = $(this).data('user-id');
+
+    if (!product) {
+        alert("Please select a coffee.");
+        return;
+    }
+
+    if (!add || !contact || !amount || amount == 0) {
+        alert("Please fill in all required fields.");
+        return;
+    }
+
+    $.ajax({
+        url: '../../handlers/book.php',
+        method: 'POST',
+        dataType: 'json',
+        data: {
+            book_now: true,
+            add,
+            contact,
+            amount,
+            userId,
+            roomId: product
+        },
+        success: function (res) {
+            if (res.success) {
+                alert("Order Added Successfully!");
+                $('#product').val('');
+                $('#quantity').val(1);
+                $('#amount').val('');
+                $('#address').val('');
+                $('#contact').val('');
+                location.reload();
+            } else {
+                alert(res.error || "An error occurred.");
+            }
+        }
+    });
+});
+
+
+
+$(document).on('click', '.edit-btn', function () {
             $('#edit-id').val($(this).data('id'));
             $('#edit-address').val($(this).data('address'));
             $('#edit-contact').val($(this).data('contact'));
@@ -280,14 +360,14 @@
                 } else {
                     alert(res.error || "An error occurred.");
                 }
-
-            }, 'json');
-
+            }, 'json').always(function() {
+                btn.removeClass('loading').prop('disabled', false);
+            });
         });
 
-        // =========== DELETE ORDER ===========
-        $('.delete-btn').click(function () {
 
+
+        $(document).on('click', '.delete-btn', function () {
             if (!confirm("Are you sure you want to delete this order?")) return;
 
             const id = $(this).data('id');
@@ -310,3 +390,6 @@
 
     });
 </script>
+
+</body>
+</html>
